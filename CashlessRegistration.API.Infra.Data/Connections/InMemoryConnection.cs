@@ -14,7 +14,8 @@ namespace CashlessRegistration.API.Infra.Data.Connections
 	              [Id] 			     INTEGER PRIMARY KEY AUTOINCREMENT,
 	              [CustomerId] 	     INTEGER NOT NULL,
 	              [Number]		     BIGINT	NOT NULL,
-                  [RegistrationDate] DATETIME NOT NULL
+                  [RegistrationDate] DATETIME NOT NULL,
+                  UNIQUE([CustomerId], [Number])
               )";
 
         private readonly string _connectionString;

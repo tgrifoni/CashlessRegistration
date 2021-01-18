@@ -9,11 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CashlessRegistration.API.Do
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CashlessRegistration.API.Infra.Data", "CashlessRegistration.API.Infra.Data\CashlessRegistration.API.Infra.Data.csproj", "{C60B7ADA-C16A-45A9-BA1C-79DDE0B7F1B6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CashlessRegistration.API.Tests", "CashlessRegistration.API.Tests\CashlessRegistration.API.Tests.csproj", "{C78C8A9D-9474-4D34-B765-14FE8350AA5C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CashlessRegistration.API.Tests", "CashlessRegistration.API.Tests\CashlessRegistration.API.Tests.csproj", "{C78C8A9D-9474-4D34-B765-14FE8350AA5C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CashlessRegistration.API.Infra.Data.Tests", "CashlessRegistration.API.Infra.Data.Tests\CashlessRegistration.API.Infra.Data.Tests.csproj", "{CDFEF642-F72B-4F45-B335-D2133D762570}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CashlessRegistration.API.Infra.Data.Tests", "CashlessRegistration.API.Infra.Data.Tests\CashlessRegistration.API.Infra.Data.Tests.csproj", "{CDFEF642-F72B-4F45-B335-D2133D762570}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CashlessRegistration.API.Domain.Tests", "CashlessRegistration.API.Domain.Tests\CashlessRegistration.API.Domain.Tests.csproj", "{481CC09B-00D5-4750-98AF-8D05FD8A1ECB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CashlessRegistration.API.Domain.Tests", "CashlessRegistration.API.Domain.Tests\CashlessRegistration.API.Domain.Tests.csproj", "{481CC09B-00D5-4750-98AF-8D05FD8A1ECB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "API", "API", "{AF4018EC-A817-4333-AF00-56DCD2351160}"
 EndProject

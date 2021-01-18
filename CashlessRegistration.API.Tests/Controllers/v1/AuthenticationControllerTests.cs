@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Moq;
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
@@ -44,7 +43,7 @@ namespace CashlessRegistration.API.Tests.Controllers.v1
             var okObjectResult = await _authenticationController.Authenticate(It.IsAny<AuthenticationRequest>()) as OkObjectResult;
 
             Assert.NotNull(okObjectResult);
-            Assert.Equal(okObjectResult.StatusCode, StatusCodes.Status200OK);
+            Assert.Equal(StatusCodes.Status200OK, okObjectResult.StatusCode);
             Assert.True(okObjectResult.Value is AuthenticationResponse);
         }
 
@@ -59,9 +58,8 @@ namespace CashlessRegistration.API.Tests.Controllers.v1
             var response = await _authenticationController.Authenticate(It.IsAny<AuthenticationRequest>()) as ObjectResult;
 
             Assert.NotNull(response);
-            Assert.Equal(response.StatusCode, StatusCodes.Status500InternalServerError);
-            Assert.True(response.Value is Exception);
-            Assert.Equal(exceptionMessage, (response.Value as Exception).Message);
+            Assert.Equal(StatusCodes.Status500InternalServerError, response.StatusCode);
+            Assert.Contains(exceptionMessage, response.Value.ToString());
         }
     }
 }

@@ -29,7 +29,7 @@ namespace CashlessRegistration.API.Controllers.v1
 
         [ProducesResponseType(typeof(AuthenticationResponse), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
         [HttpPost]
         public async Task<IActionResult> Authenticate([FromBody] AuthenticationRequest request)
         {
@@ -44,7 +44,7 @@ namespace CashlessRegistration.API.Controllers.v1
             catch (Exception ex)
             {
                 _logger.LogError(ex, ex.Message);
-                return StatusCode(StatusCodes.Status500InternalServerError, ex);
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.ToString());
             }
         }
     }

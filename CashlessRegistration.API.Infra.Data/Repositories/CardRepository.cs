@@ -2,7 +2,9 @@
 using CashlessRegistration.API.Domain.Contracts.Repositories;
 using CashlessRegistration.API.Domain.Models.Entities;
 using CashlessRegistration.API.Infra.Data.Connections;
+using CashlessRegistration.API.Infra.Data.Models.Exceptions;
 using Dapper;
+using Microsoft.Data.Sqlite;
 using System.Threading.Tasks;
 
 namespace CashlessRegistration.API.Infra.Data.Repositories
@@ -24,8 +26,18 @@ namespace CashlessRegistration.API.Infra.Data.Repositories
 
         public async Task<int> SaveAsync(ICard card)
         {
-            using var connection = _connection.CreateConnection();
-            return await connection.ExecuteScalarAsync<int>(SaveCommand, card);
+            try
+            {
+                using var connection = _connection.CreateConnection();
+                return await connection.ExecuteScalarAsync<int>(SaveCommand, card);
+            }
+            catch (SqliteException ex)
+            {
+                var uniqueConstraintErrorCode = 19;
+                if (ex.SqliteErrorCode == uniqueConstraintErrorCode)
+                    throw SqliteUniqueConstraintException.New;
+                throw;
+            }
         }
 
         public async Task<ICard> GetById(int id)

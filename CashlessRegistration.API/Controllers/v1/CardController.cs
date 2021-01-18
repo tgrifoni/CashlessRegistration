@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using CashlessRegistration.API.Domain.Commands.v1.SaveCard;
 using CashlessRegistration.API.Domain.Queries.v1.ValidateCard;
+using CashlessRegistration.API.Infra.Data.Models.Exceptions;
 using CashlessRegistration.API.Models.DTOs.Card;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -31,7 +32,8 @@ namespace CashlessRegistration.API.Controllers.v1
         [ProducesResponseType(typeof(SaveCardResponse), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status409Conflict)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
         [HttpPost]
         public async Task<IActionResult> Save([FromBody] SaveCardRequest request)
         {
@@ -43,17 +45,22 @@ namespace CashlessRegistration.API.Controllers.v1
 
                 return Created($"/card/{response.CardId}", response);
             }
+            catch (SqliteUniqueConstraintException ex)
+            {
+                _logger.LogError(ex, ex.Message);
+                return StatusCode(StatusCodes.Status409Conflict, ex.Message);
+            }
             catch (Exception ex)
             {
                 _logger.LogError(ex, ex.Message);
-                return StatusCode(StatusCodes.Status500InternalServerError, ex);
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.ToString());
             }
         }
 
         [ProducesResponseType(typeof(ValidateCardResponse), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
         [HttpPost("[action]")]
         public async Task<IActionResult> Validate([FromBody] ValidateCardRequest request)
         {
@@ -67,7 +74,7 @@ namespace CashlessRegistration.API.Controllers.v1
             catch (Exception ex)
             {
                 _logger.LogError(ex, ex.Message);
-                return StatusCode(StatusCodes.Status500InternalServerError, ex);
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.ToString());
             }
         }
     }
