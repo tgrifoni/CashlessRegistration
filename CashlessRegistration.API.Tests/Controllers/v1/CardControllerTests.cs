@@ -48,7 +48,7 @@ namespace CashlessRegistration.API.Tests.Controllers.v1
             Assert.NotNull(createdResult);
             Assert.Equal(StatusCodes.Status201Created, createdResult.StatusCode);
             Assert.NotEmpty(createdResult.Location);
-            Assert.True(createdResult.Value is SaveCardResponse);
+            Assert.IsType<SaveCardResponse>(createdResult.Value);
         }
 
         [Fact]
@@ -100,7 +100,7 @@ namespace CashlessRegistration.API.Tests.Controllers.v1
 
             Assert.NotNull(response);
             Assert.Equal(StatusCodes.Status200OK, response.StatusCode);
-            Assert.True(response.Value is ValidateCardResponse);
+            Assert.IsType<ValidateCardResponse>(response.Value);
         }
 
         [Fact]

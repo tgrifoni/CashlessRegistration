@@ -44,7 +44,7 @@ namespace CashlessRegistration.API.Tests.Controllers.v1
 
             Assert.NotNull(okObjectResult);
             Assert.Equal(StatusCodes.Status200OK, okObjectResult.StatusCode);
-            Assert.True(okObjectResult.Value is AuthenticationResponse);
+            Assert.IsType<AuthenticationResponse>(okObjectResult.Value);
         }
 
         [Fact]

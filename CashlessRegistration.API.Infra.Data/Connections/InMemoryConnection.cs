@@ -9,7 +9,7 @@ namespace CashlessRegistration.API.Infra.Data.Connections
     public class InMemoryConnection : IConnection, IDisposable
     {
         private const string CreateDatabaseCommand =
-            @"CREATE TABLE [Card]
+            @"CREATE TABLE IF NOT EXISTS [Card]
               (
 	              [Id] 			     INTEGER PRIMARY KEY AUTOINCREMENT,
 	              [CustomerId] 	     INTEGER NOT NULL,

@@ -13,7 +13,7 @@ namespace CashlessRegistration.API.Domain.Tests.Models.Entities
             var card = new Card(id: It.IsAny<int>(), customerId: It.IsAny<int>(), cardNumber: It.IsAny<long>());
 
             Assert.Equal(DateTime.UtcNow.Date, card.RegistrationDate.Date);
-            Assert.True(card.RegistrationDate.Kind == DateTimeKind.Utc);
+            Assert.Equal(DateTimeKind.Utc, card.RegistrationDate.Kind);
         }
 
         [Theory]
